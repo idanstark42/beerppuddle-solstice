@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useData } from '../logic/data-access'
+import Loader from '../components/loader'
 
 export default function PlayerScreen () {
   const { id } = useParams()
@@ -9,7 +10,7 @@ export default function PlayerScreen () {
   const [loading, setLoading] = useState(false)
 
   if (data.length === 0) {
-    return <div>Loading...</div>
+    return <Loader />
   }
 
   const player = data.find((player) => player.id == id)
@@ -26,11 +27,16 @@ export default function PlayerScreen () {
     setLoading(false)
   }
 
+  console.log(player)
+
   return <div className={`player-container ${loading ? 'loading' : ''}`} style={{ backgroundColor: opposite }}>
     <div className="player" onClick={update} style={{ backgroundColor: color, color: opposite }}>
       <h1>{player['person name']}</h1>
       <h2>attuned {color}</h2>
       <h4>click anywhere to switch</h4>
     </div>
+    {(player['can vote'] === 'yes') ? <div className='vote' onClick={() => window.location.href = `/vote/${id}`}>
+      <div className='vote-button'>Vote</div>
+    </div> : ''}
   </div>
 }

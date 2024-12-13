@@ -16,29 +16,109 @@ html, body, #root {
   width: 100%;
 }
 
+.player-container .vote {
+  height: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  box-sizing: border-box;
+  background-color: #23252f;
+}
+
+.player-container .vote-button, .vote-page .submit-button {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.3rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0f1014;
+  color: white;
+
+  text-transform: uppercase;
+}
+
+.vote-page .submit-button.disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .loading > .player {
   animation: flash 2s infinite ease-in-out;
+}
+
+.npc, .vote-page {
+  height: 100%;
+  width: 100%;
+  background-color: #23252f;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.npc > .search-bar, .vote-page > .search-bar, .vote-page > .submit  {
+  padding: 1rem;
+  box-shadow: #000000a3 0 1px 3px 1px;
+}
+
+.npc > .search-bar > input, .vote-page > .search-bar > input {
+  height: 3rem;
+  width: 100%;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border: 1px solid #000;
+  border-radius: 0.5rem;
 }
 
 .player-list {
   height: 100%;
   width: 100%;
+  background: #23252f;
   padding: 1rem;
+  gap: 1rem;
   box-sizing: border-box;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   overflow: auto;
 }
 
+.selected-players-seperator {
+  width: 100%;
+  border-bottom: 2px solid black;
+  margin: 0.5rem 0;
+  grid-column: 1 / span 2;
+}
+
+.none-selected {
+  width: 100%;
+  grid-column: 1 / span 2;
+  text-align: center;
+  color: white;
+  font-size: 1.5rem;
+}
+
 .player-list > .player {
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
 
   padding: 1rem;
   box-sizing: border-box;
-  height: 4rem;
-  margin: 0.5rem 0;
   border-radius: 1rem;
+  background: #0f1014;
+  color: white;
+}
+
+.player-list > .player > * {
+  margin: 0;
+  text-align: center;
 }
 
 .player-list > .player.black {
@@ -52,17 +132,20 @@ html, body, #root {
   border: 2px solid #000;
 }
 
-.player-list > .search-bar > input {
-  width: 100%;
-  padding: 0.5rem;
-  box-sizing: border-box;
-  border: 1px solid #000;
-  border-radius: 0.5rem;
+.player-list > .player.selected {
+  box-shadow: gold 0 0 5px 1px;
 }
 
 .balance {
   height: 100%;
   width: 100%;
+}
+
+.loader {
+  height: 100%;
+  width: 100%;
+  background-color: black;
+  animation: flash 2s infinite ease-in-out;
 }
 
 @keyframes flash {

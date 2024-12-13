@@ -2,7 +2,7 @@ import { useEffect, useState, createContext, useContext } from "react"
 
 const DataContext = createContext()
 
-const BASE_URL = 'https://script.google.com/macros/s/AKfycbxpqpXy15quX5wVTBLKIX6bvmo_p19bvPI5NyEa9SCcdsF87IAszpAAt6BEWghKANhK/exec'
+const BASE_URL = 'https://script.google.com/macros/s/AKfycbzcYxwlkisg8XofsKtUdIVGOqlrF1-UAE9HXjbS5LN5I7Ov0Dl62vuAUB8bXkxwmeoE/exec'
 
 export function DataProvider({ children, reload }) {
   const [data, setData] = useState([])
@@ -48,7 +48,20 @@ export function DataProvider({ children, reload }) {
       .catch((err) => console.error(err))
   }
 
-  return <DataContext.Provider value={{ data, set }}>{children}</DataContext.Provider>
+  async function vote (id, target) {
+    return fetch(`${BASE_URL}?action=vote&id=${id}&vote=${target}`)
+      .then((res) => res.text())
+      .then((data) => {
+        if (data === target) {
+          setData((prev) => prev.map((player) => player.id == id ? { ...player, vote: target } : player))
+        } else {
+          throw new Error(`Failed to update vote for player ${id}`)
+        }
+      })
+      .catch((err) => console.error(err))
+  }
+
+  return <DataContext.Provider value={{ data, set, vote }}>{children}</DataContext.Provider>
 }
 
 export function useData() {
