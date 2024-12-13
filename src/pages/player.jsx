@@ -6,7 +6,7 @@ import { useData } from '../logic/data-access'
 export default function PlayerScreen () {
   const { id } = useParams()
   const { data, set } = useData()
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
 
   if (data.length === 0) {
     return <div>Loading...</div>
