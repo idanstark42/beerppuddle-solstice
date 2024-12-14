@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useData } from "../logic/data-access"
 import Loader from "../components/loader"
 
-const SPINNING_SPEED = 10
+const SPINNING_SPEED = 100
 
 export default function Balance () {
   const { data } = useData()
@@ -10,8 +10,8 @@ export default function Balance () {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setAngle((prev) => (prev + SPINNING_SPEED / 10) % 360)
-    }, 100)
+      setAngle((prev) => (prev + SPINNING_SPEED / 100) % 360)
+    }, 10)
 
     return () => clearInterval(interval)
   }, [])
