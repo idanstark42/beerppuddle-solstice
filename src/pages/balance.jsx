@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { useData } from "../logic/data-access"
 import Loader from "../components/loader"
 
-const SPINNING_SPEED = 50
+const SPINNING_SPEED = 20
 
 export default function Balance () {
   const { data } = useData()
